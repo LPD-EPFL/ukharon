@@ -22,6 +22,7 @@
 
 #include <dory/membership/membership.hpp>
 
+#include "config.hpp"
 #include "membership.h"
 
 static auto main_logger = dory::std_out_logger("Member");
@@ -111,8 +112,7 @@ extern "C" {
 void start_membership_c() {
 #ifndef MEMBERSHIP_NOP_LIB
   ctx = std::make_unique<Context>();
-  ctx->start(10, "ff12:601b:ffff::1:ff28:cf2a/0xc003",
-             "ff12:401b:ffff::1/0xc003");
+  ctx->start(10, MCGROUP, KERNEL_MCGROUP);
 #endif
 }
 
