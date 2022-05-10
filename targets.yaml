@@ -1,0 +1,18 @@
+shared : []
+extern : []
+third-party : []
+crash-consensus : []
+
+memstore : [shared, extern]
+ctrl : [shared, extern, memory]
+conn : [shared, ctrl, memstore, third-party]
+crypto : [shared, memstore]
+ud : [extern, shared, memstore, ctrl, conn]
+special : [third-party, shared]
+memory : [special, shared]
+rpc : [shared]
+paxos : [extern, shared, memstore, ctrl, conn]
+membership : [conn, ctrl, extern, memstore, rpc, paxos, shared, special]
+
+demo : [conn, ctrl, extern, membership, memstore, rpc, shared, third-party, crash-consensus]
+tools : [shared]
