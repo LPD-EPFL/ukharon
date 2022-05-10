@@ -29,6 +29,7 @@
 #include "../mica.hpp"
 
 #include "client.hpp"
+#include "config.hpp"
 
 static auto main_logger = dory::std_out_logger("HERD");
 
@@ -120,7 +121,7 @@ int main(int argc, char *argv[]) {
   dory::LatencyProfiler profiler_for_slave(0);
   Client client_to_slave(id, cb, "primary-pd", "primary-mr", "cq-slave", arena_allocator, profiler_for_slave);
 
-  dory::pin_main_to_core(dory::membership::LeaseCheckingCore);
+  dory::pin_main_to_core(HerdClientCore);
 
   // Generate the access keys.
   auto keys = dory::deleted_unique_ptr<uint128>(mica_gen_keys(TEST_NUM_KEYS),

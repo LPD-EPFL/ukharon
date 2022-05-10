@@ -26,6 +26,7 @@
 #include "../connection.hpp"
 #include "../rpc-slot.hpp"
 
+#include "config.hpp"
 #include "service.hpp"
 
 struct LeaderState {
@@ -141,7 +142,7 @@ int main(int argc, char *argv[]) {
   dory::memstore::ProcessAnnouncer announcer;
   announcer.announceProcess(id, rpc_server.port());
 
-  int core = 14;
+  int core = HerdServerCore;
   LOGGER_INFO(main_logger, "Pinning polling thread to core {}", core);
   dory::pin_main_to_core(core);
 
