@@ -36,7 +36,7 @@ class DorySharedConan(ConanFile):
         pass
 
     def requirements(self):
-        self.requires("spdlog/1.8.5")
+        self.requires("spdlog/1.10.0")
         self.requires("tomlplusplus/2.2.0")
 
     def build(self):

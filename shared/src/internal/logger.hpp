@@ -8,5 +8,6 @@
 #endif
 #endif
 
+#include <spdlog/cfg/env.h>
 #include <spdlog/sinks/stdout_color_sinks.h>
 #include <spdlog/spdlog.h>
