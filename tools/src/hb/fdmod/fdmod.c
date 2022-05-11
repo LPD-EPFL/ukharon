@@ -33,7 +33,7 @@ static char *DEVICE_NAME = "mlx5_1";
 #define QKEY 0
 #define PSN 0
 static char *IPV6_GID = "ff12:401b:ffff::1";
-static int LID = 0xC003;
+static int LID = 0xc004;
 
 // parameters
 module_param(DEVICE_NAME, charp, 0000);
