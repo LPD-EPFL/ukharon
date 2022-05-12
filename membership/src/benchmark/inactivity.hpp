@@ -37,7 +37,7 @@ class InactivityProfiler : public dory::LatencyProfiler {
   }
 
   void report() {
-    std::cout << "Number of sample: " << events_total << "\n"
+    std::cout << "Number of samples: " << events_total << "\n"
               << "Number of active samples: " << active_total << "\n"
               << "Number of inactive samples: " << events_total - active_total
               << "\n"
@@ -45,7 +45,7 @@ class InactivityProfiler : public dory::LatencyProfiler {
               << "\n"
               << "First active sample: " << first_active.value() << "\n"
               << "Last active sample: " << last_active.value() << "\n"
-              << "Distribution of period of inactivity:"
+              << "Distribution of periods of inactivity:"
               << "\n"
               << std::endl;
     dory::LatencyProfiler::report();
