@@ -61,21 +61,12 @@ class HeartbeatPollerController {
     hb_poller->tick();
   }
 
-  void monitor(ProcIdType connect_to, std::string const &ip, int port) {
+  void monitor(ProcIdType connect_to, std::string const &ip, int port, bool skip) {
     hb_poller->stop();
 
-    // TODO (Hack to be removed):
-    // Do not involve quatros in the ring
-    std::unordered_set<std::string> quatro_ips = {
-      "128.178.154.41",
-      "128.178.154.42",
-      "128.178.154.60",
-      "128.178.154.65"
-    };
-
-    if (quatro_ips.find(ip) != quatro_ips.end()) {
+    if (skip) {
       monitored_id = connect_to;
-      LOGGER_WARN(logger, "Not monitoring quatro with id {}.", connect_to);
+      LOGGER_WARN(logger, "Not monitoring node with id {}.", connect_to);
       return;
     }
 

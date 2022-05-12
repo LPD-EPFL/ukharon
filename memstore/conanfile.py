@@ -36,6 +36,7 @@ class DoryMemstoreConan(ConanFile):
     def requirements(self):
         self.requires("dory-shared/0.0.1")
         self.requires("dory-extern/0.0.1")
+        self.requires("dory-special/0.0.1")
 
     def build(self):
         self.python_requires["dory-compiler-options"].module.setup_cmake(

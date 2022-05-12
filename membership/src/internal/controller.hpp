@@ -16,6 +16,7 @@
 #include <dory/shared/logger.hpp>
 #include <dory/shared/pointer-wrapper.hpp>
 #include <dory/shared/units.hpp>
+#include <dory/shared/unused-suppressor.hpp>
 #include <dory/special/heartbeat.hpp>
 #include <dory/memstore/store.hpp>
 
@@ -261,7 +262,8 @@ class MembershipController {
         for (int16_t i = 0; i < membership.cnt; i++) {
           if (membership.members[i].isConsensus()) {
             auto connect_to = membership.members[i].pid;
-            auto [ip, port] = announcer.processToHost(connect_to);
+            auto [ip, port, kernel] = announcer.processToHost(connect_to);
+	          dory::ignore(kernel);
 
             active_view_majority_controller->monitor(connect_to, ip, port);
           }
@@ -277,7 +279,8 @@ class MembershipController {
         for (int16_t i = 0; i < membership.cnt; i++) {
           if (membership.members[i].isCache()) {
             auto connect_to = membership.members[i].pid;
-            auto [ip, port] = announcer.processToHost(connect_to);
+            auto [ip, port, kernel] = announcer.processToHost(connect_to);
+	          dory::ignore(kernel);
 
             active_view_cache_controller->monitor(connect_to, ip, port);
             connected = true;
@@ -303,8 +306,11 @@ class MembershipController {
             LOGGER_DEBUG(logger, "Connecting the heartbeat to {}", next.value());
 
             auto connect_to = next.value();
-            auto [ip, port] = announcer.processToHost(connect_to);
-            heartbeat_poller->monitor(connect_to, ip, port);
+            auto [ip, port, kernel] = announcer.processToHost(connect_to);
+
+            // Do not involve nodes with not proper kernel in the ring
+            bool skip = !special::heartbeat::is_kernel_compatible(kernel, true);
+            heartbeat_poller->monitor(connect_to, ip, port, skip);
           }
         } else {
           LOGGER_DEBUG(logger, "Nowhere to connect the heartbeat to");

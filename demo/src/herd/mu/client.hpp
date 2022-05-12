@@ -15,6 +15,7 @@
 #include <dory/shared/latency.hpp>
 #include <dory/shared/pinning.hpp>
 #include <dory/shared/units.hpp>
+#include <dory/shared/unused-suppressor.hpp>
 
 #include <dory/memstore/store.hpp>
 
@@ -107,7 +108,8 @@ public:
   }
 
   void connect(ProcIdType connect_to) {
-    auto [ip, port] = announcer.processToHost(connect_to);
+    auto [ip, port, kernel] = announcer.processToHost(connect_to);
+    dory::ignore(kernel);
     cli.emplace(ip, port);
 
     cli->connect();

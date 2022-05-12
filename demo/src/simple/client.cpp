@@ -15,6 +15,7 @@
 
 #include <dory/shared/logger.hpp>
 #include <dory/shared/units.hpp>
+#include <dory/shared/unused-suppressor.hpp>
 
 #include <dory/conn/rc.hpp>
 #include <dory/rpc/conn/universal-connector.hpp>
@@ -118,7 +119,8 @@ int main(int argc, char *argv[]) {
     int connect_to;
     std::cin >> connect_to;
 
-    auto [ip, port] = announcer.processToHost(connect_to);
+    auto [ip, port, kernel] = announcer.processToHost(connect_to);
+    dory::ignore(kernel);
     dory::rpc::conn::UniversalConnectionRpcClient<ProcIdType, RpcKind::Kind>
         cli(ip, port);
 

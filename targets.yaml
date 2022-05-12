@@ -3,7 +3,7 @@ extern : []
 third-party : []
 crash-consensus : []
 
-memstore : [shared, extern]
+memstore : [shared, extern, special]
 ctrl : [shared, extern, memory]
 conn : [shared, ctrl, memstore, third-party]
 ud : [extern, shared, memstore, ctrl, conn]

@@ -1,6 +1,7 @@
 #pragma once
 
 #include <dory/shared/logger.hpp>
+#include <dory/shared/unused-suppressor.hpp>
 
 #include "../connection.hpp"
 #include "../common.hpp"
@@ -45,7 +46,8 @@ public:
   }
 
   bool connectTo(ProcIdType connect_to, RpcSlot **slave_fip_at) {
-    auto [ip, port] = announcer.processToHost(connect_to);
+    auto [ip, port, kernel] = announcer.processToHost(connect_to);
+    dory::ignore(kernel);
 
     cli.emplace(ip, port);
 
