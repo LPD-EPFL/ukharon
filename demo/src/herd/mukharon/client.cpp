@@ -239,8 +239,8 @@ int main(int argc, char *argv[]) {
   } else {
     // std::cout << "Is last_on_master broken? (us) " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - *last_on_master).count() << std::endl;
     // std::cout << "Is first_on_slave broken? (us) " << std::chrono::duration_cast<std::chrono::microseconds>(std::chrono::steady_clock::now() - *first_on_slave).count() << std::endl;
-    std::cout << "Time to switch strict (us) " << std::chrono::duration_cast<std::chrono::nanoseconds>(*switched_to_slave - *last_on_master).count() << std::endl;
-    std::cout << "Time to switch (us) " << std::chrono::duration_cast<std::chrono::nanoseconds>(*first_on_slave - *last_on_master).count() << std::endl;
+    std::cout << "Time to switch strict (us) " << std::chrono::duration_cast<std::chrono::microseconds>(*switched_to_slave - *last_on_master).count() << std::endl;
+    std::cout << "Time to switch (us) " << std::chrono::duration_cast<std::chrono::microseconds>(*first_on_slave - *last_on_master).count() << std::endl;
 
     // profiler_for_master.reportBuckets();
     profiler_for_master.report();
