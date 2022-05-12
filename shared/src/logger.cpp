@@ -18,11 +18,9 @@ logger std_out_logger(std::string const &prefix) {
 
   if (logger == nullptr) {
     logger = spdlog::stdout_color_mt(prefix);
-
     logger->set_pattern(FormatStrDefault);
+    spdlog::cfg::load_env_levels();
   }
-
-  spdlog::cfg::load_env_levels();
 
   return logger;
 }
