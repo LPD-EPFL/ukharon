@@ -26,5 +26,5 @@ RUN pip3 install --upgrade pyyaml"<6.0,>=3.11" cmake-format black halo
 #RUN conan profile new default --detect
 #RUN conan profile update settings.compiler.libcxx=libstdc++11 default
 
-COPY . /dory/
-RUN /dory/build.py
+COPY . /ukharon/
+RUN /ukharon/build.py

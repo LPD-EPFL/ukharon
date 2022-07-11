@@ -1,13 +1,8 @@
-![alt text](logo/dory-logo-256.png "Dory")
+![alt text](logo/ukharon-logo.png "uKharon")
+### A Membership Service for Microsecond Applications
+Check out our [ATC paper](https://www.usenix.org/conference/atc22/presentation/guerraoui) for more details!
 
-*The word "dory" was first attested by Homer with the meanings of "wood" and "spear"*
-
-
-#### [Wiki](https://github.com/LPD-EPFL/dory/wiki)
-![clang-format-test](https://github.com/LPD-EPFL/dory/workflows/clang-format-test/badge.svg)
-
-
-## Requirements
+## Build Requirements
 
 - [conan](https://conan.io/) package manager
     ```sh
@@ -22,7 +17,11 @@
     ```
 
 - cmake v3.9.x
-- clang-format >= v6.0.0
+- ninja
+- gawk
+- libibverbs-dev
+- libmemcached-dev
+- Other non-essential dependencies are given in the [Dockerfile](https://github.com/LPD-EPFL/ukharon/blob/master/Dockerfile).
 
 ## Build
 
@@ -36,17 +35,18 @@ this will create all conan packages and build the executables.
 
 __Note:__ If `gcc` is available, it is used as the default compiler. In a system with `clang` only, then `clang` becomes the default compiler. In any case, you can check the available compilers/compiler versions by calling `./build.py --help`.
 
+__Note:__ If your compiler is newer than gcc-11 or clang-12, you need to add [profiles](https://github.com/LPD-EPFL/ukharon/tree/master/conan/profiles) and edit the [supported versions](https://github.com/LPD-EPFL/ukharon/blob/master/conan/compilers/link.sh) list.
 
 ## Docker
 
-You can manually build the [Dockerfile](https://github.com/LPD-EPFL/dory/blob/master/Dockerfile) under the root of this repo.
+You can manually build the [Dockerfile](https://github.com/LPD-EPFL/ukharon/blob/master/Dockerfile) under the root of this repo.
 
 ```sh
-docker build -t dory .
+docker build -t ukharon .
 ```
 ---
 
 
 ## Usage
 
-Refer to the respective package READMEs.
+Follow the instructions on the [artifacts](https://github.com/LPD-EPFL/ukharon-artifacts) repository!
